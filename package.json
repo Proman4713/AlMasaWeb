@@ -1,24 +1,42 @@
 {
   "name": "almasa",
+  "version": "1.0.0",
   "private": true,
   "type": "module",
   "scripts": {
     "build": "react-router build",
     "dev": "react-router dev",
-    "start": "react-router-serve ./build/server/index.js"
+    "start-prod": "react-router-serve ./build/server/index.js",
+    "start": "react-router dev",
+    "lint": "eslint \"app/**/*.{js,jsx}\""
   },
   "dependencies": {
+    "@emotion/react": "^11.14.0",
+    "@emotion/styled": "^11.14.0",
+    "@fortawesome/fontawesome-svg-core": "^6.7.2",
+    "@fortawesome/free-brands-svg-icons": "^6.7.2",
+    "@fortawesome/free-regular-svg-icons": "^6.7.2",
+    "@fortawesome/free-solid-svg-icons": "^6.7.2",
+    "@fortawesome/react-fontawesome": "^0.2.2",
+    "@mui/material": "^7.0.2",
     "@react-router/node": "^7.5.1",
     "@react-router/serve": "^7.5.1",
     "isbot": "^5.1.17",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
-    "react-router": "^7.5.1"
+    "react-router": "^7.5.1",
+    "react-router-dom": "^7.5.1",
+    "react-stickynode": "^5.0.2",
+    "react-swipeable": "^7.0.2"
   },
   "devDependencies": {
+    "@eslint/js": "^9.25.0",
     "@react-router/dev": "^7.5.1",
-    "@tailwindcss/vite": "^4.0.0",
-    "tailwindcss": "^4.0.0",
-    "vite": "^5.4.11"
+    "eslint": "^9.25.0",
+    "eslint-plugin-react": "^7.37.5",
+    "eslint-plugin-react-hooks": "^5.2.0",
+    "globals": "^16.0.0",
+    "vite": "^5.4.11",
+    "vite-plugin-eslint": "^1.8.1"
   }
 }

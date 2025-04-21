@@ -1,15 +1,66 @@
-@import "tailwindcss";
+:root {
+	--font-sans: "Inter", ui-sans-serif, system-ui, sans-serif,
+		"Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+}
 
-@theme {
-  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif,
-    "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+a {
+	text-decoration: none;
+	color: inherit;
+}
+
+iframe #header {
+	display: none
+}
+
+::-webkit-scrollbar {
+	width: 10px;
+}
+
+::-webkit-scrollbar-track {
+	background-color: #F48420;
+}
+
+::-webkit-scrollbar-thumb {
+	background: #2090F4;
+	border-radius: 10px;
+}
+
+input {
+	border-color: unset;
+}
+
+.MuiSelect-select.MuiSelect-outlined.MuiInputBase-input.MuiOutlinedInput-input {
+	font-weight: bold;
+}
+
+.MuiList-root.MuiList-padding.MuiMenu-list {
+	background-color: #2090F4;
+}
+
+.MuiOutlinedInput-notchedOutline  {
+	border-color: transparent !important;
+}
+
+.MuiButtonBase-root.MuiMenuItem-root.MuiMenuItem-gutters {
+	font-weight: bold;
+	padding: 6px 30px;
+}
+
+.MuiButtonBase-root.MuiMenuItem-root.MuiMenuItem-gutters:hover {
+	background-color: rgba(0, 0, 0, 0.14);
+}
+
+.MuiButtonBase-root.MuiMenuItem-root.MuiMenuItem-gutters.Mui-selected {
+	background-color: #F48420;
+	opacity: 1;
 }
 
 html,
 body {
-  @apply bg-white dark:bg-gray-950;
-
-  @media (prefers-color-scheme: dark) {
-    color-scheme: dark;
-  }
+	margin: 0;
+	padding: 0;
+	height: 100%;
+	display: flex;
+	flex-direction: column;
+	flex: 1;
 }
