@@ -1,5 +1,5 @@
 import "./WebsiteHeader.css";
-import { memo, useContext, useEffect, useState } from 'react';
+import { memo, useCallback, useContext, useEffect, useState } from 'react';
 import Sticky from 'react-stickynode';
 import { AppThemeContext } from '../contexts/colors';
 import { localeContext } from "../contexts/localeManagement";
@@ -9,7 +9,7 @@ import { faLayerGroup } from "@fortawesome/free-solid-svg-icons/faLayerGroup";
 import { faBars } from "@fortawesome/free-solid-svg-icons/faBars";
 import { faPhone } from "@fortawesome/free-solid-svg-icons/faPhone";
 import { faSearch } from "@fortawesome/free-solid-svg-icons/faSearch";
-import UserProfile from "./Data/UserProfile";
+import UserProfile from "./data/UserProfile";
 import { Link } from "react-router-dom";
 import Box from '@mui/material/Box';
 import Drawer from '@mui/material/Drawer';
@@ -19,37 +19,16 @@ import ListItem from '@mui/material/ListItem';
 import ListItemButton from '@mui/material/ListItemButton';
 import ListItemText from '@mui/material/ListItemText';
 
-import logoText from "../Assets/Images/lockup.png"
+import logoText from "../assets/images/lockup.png"
 import { MenuItem, Select } from "@mui/material";
+import { useScrollStyling } from "../utils/useScrollStyling";
 
-function scrollFunction() {
-	if (typeof document === "undefined") return;
-
-	const header = document.querySelector("header");
-	if (!header) return;
-
-	if (document.body.scrollTop > 80 || document.documentElement.scrollTop > 80) {
-		header.style.padding = '5px 10px'
-		header.classList.remove('header-transparent')
-	} else {
-		header.style.padding = '24px 10px'
-		header.classList.add('header-transparent')
-	}
-}
-
-const SecondaryNavItem = ({ text, icon, target="/", internal=true }) => {
+const SecondaryNavItem = ({ text, id="", icon, target="/", onClick=() => { }, internal=true }) => {
 	const { appText } = useContext(localeContext);
-
-	const IconComp = memo(() => {
-		return (<>
-			<FontAwesomeIcon icon={icon} fontSize={"1.25em"} />
-			&nbsp;&nbsp;
-		</>)
-	})
 	
 	return (
-		<li className="nav-item">
-			{ icon && <IconComp /> }
+		<li className="nav-item" id={id} onClick={onClick}>
+			{ icon && <><FontAwesomeIcon icon={icon} fontSize={"1.25em"} /> &nbsp;&nbsp;</> }
 			<Link to={target} target={internal ? "" : "_blank"}>
 				{appText[text] || text}
 			</Link>
@@ -60,7 +39,7 @@ const SecondaryNavItem = ({ text, icon, target="/", internal=true }) => {
 export default function WebsiteHeader({
 	showAppName = true,
 	// headerTitle="",
-	forceBG=false,
+	forceBG="translucent",
 	drawer=false,
 	drawerOpen=false,
 	setDrawerOpen=() => {},
@@ -79,56 +58,25 @@ export default function WebsiteHeader({
 }) {
 	const { colors, dark } = useContext(AppThemeContext);
 	const { locale, appText } = useContext(localeContext);
+	useScrollStyling(colors, forceBG);
+	
 	const [selectedSearchCategory, setSelectedSearchCategory] = useState("all");
-
-	useEffect(() => {
-		const changeDrawerStyles = async () => {
-			await new Promise(resolve => setTimeout(resolve, 0)); // Allow layout to complete
-			document.querySelectorAll(".MuiPaper-root.MuiDrawer-paper").forEach(ele => {
-				ele.style.backgroundColor = colors().primary;
-			})
-		}
-
-		const changeHeaderStyles = async () => {
-			await new Promise(resolve => setTimeout(resolve, 0)); // Allow layout to complete
-			let innerWrapper = document.querySelector(".sticky-inner-wrapper");
-			let outerWrapperRect = document.querySelector(".sticky-outer-wrapper").getBoundingClientRect();
-			innerWrapper.style.width = (outerWrapperRect.width || outerWrapperRect.right - outerWrapperRect.left) + "px";
-		}
-
-		const handleScroll = () => {
-			// Debounce the scroll event to avoid layout thrashing
-			scrollFunction();
-			setTimeout(changeHeaderStyles, 20); // Adjust the delay as needed
-		};
-
-		changeDrawerStyles();
-		changeHeaderStyles();
-
-		window.addEventListener("scroll", handleScroll);
-		window.addEventListener("resize", changeHeaderStyles);
-
-		return () => {
-			window.removeEventListener("scroll", handleScroll);
-			window.removeEventListener("resize", changeHeaderStyles);
-		};
-	}, [dark, drawerOpen])
 
 	return (
 		<>
 			<Sticky enabled innerZ={100} className="height-max-content">
 				<header
-					style={{ background: colors().primary, marginBottom: 0 }}
+					style={{ background: colors.primary, marginBottom: 0 }}
 					id="header"
-					className={forceBG ? "" : "header-transparent"}
+					className={forceBG === "opaque" ? "" : "header-transparent"}
 				>
 					<div className="header-container">
 						{(drawer && !showAppName)
 							? <>
-								<Drawer open={drawerOpen} onClose={() => setDrawerOpen(false)}>
+								<Drawer open={drawerOpen} onClose={() => setDrawerOpen(false)} slotProps={{ paper: { style: { backgroundColor: dark ? colors.primary : "#3d3d3d" } } }}>
 									<Box sx={{ width: 300 }} role="presentation">
 										<ListItem key={"text"} className={"drawer-header"} disablePadding>
-											<ListItemButton style={{ color: colors().constantWhite }}>
+											<ListItemButton style={{ color: colors.constantWhite }}>
 												<ListItemText primary={drawerTitle} />
 											</ListItemButton>
 										</ListItem>
@@ -136,7 +84,7 @@ export default function WebsiteHeader({
 										<List>
 											{drawerItems.map((item, index) => (
 												<ListItem key={item.text} className={item.active ? "active" : ""} disablePadding>
-													<ListItemButton onClick={item.onClick} style={{ color: colors().constantWhite }}>
+													<ListItemButton onClick={item.onClick} style={{ color: colors.constantWhite }}>
 														<ListItemText sx={{ textAlign: locale === "ar" ? "right" : "left" }} primary={item.text} />
 													</ListItemButton>
 												</ListItem>
@@ -170,12 +118,12 @@ export default function WebsiteHeader({
 								onClick={() => setDrawerOpen(!drawerOpen)}
 							/>
 							: null}
-						<div className="desktop nav">
+						<nav className="desktop nav">
 							<ul className="main-nav">
 								<li className="nav-item nav-link"><Link to={"/"}>{appText["Home"]}</Link></li>
 								<li className="nav-item nav-link">{appText["About"]}</li>
 							</ul>
-							{/* {headerTitle && <h2 style={{ fontSize: 22, color: colors().success }}>{headerTitle}</h2>} */}
+							{/* {headerTitle && <h2 style={{ fontSize: 22, color: colors.success }}>{headerTitle}</h2>} */}
 							<div id="middleSearch">
 								<Select
 									id="categorySelect"
@@ -192,14 +140,14 @@ export default function WebsiteHeader({
 									<MenuItem value="monitors">Monitors</MenuItem>
 								</Select>
 								<input type="text" id="searchbox" placeholder="Search" />
-								<FontAwesomeIcon color={colors().almasaMain} style={{ padding: 2, cursor: "pointer", alignSelf: "center" }} icon={faSearch} fontSize={"2.25em"} />
+								<FontAwesomeIcon color={colors.almasaMain} style={{ padding: 2, cursor: "pointer", alignSelf: "center" }} icon={faSearch} fontSize={"2.25em"} />
 							</div>
 							<ul className="secondary-nav">
 								<SecondaryNavItem icon={faCartShopping} text="Shop" />
-								<SecondaryNavItem icon={faLayerGroup} text="Categories" />
+								<SecondaryNavItem id="categories" icon={faLayerGroup} text="Categories" />
 								<SecondaryNavItem target="tel:201017221615" internal={false} icon={faPhone} text="Telephone" />
 							</ul>
-						</div>
+						</nav>
 						<UserProfile />
 					</div>
 				</header>

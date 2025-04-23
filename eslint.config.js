@@ -27,6 +27,7 @@ export default defineConfig([
 			"no-unused-vars": "warn",
 			"no-constant-condition": "off",
 			"no-constant-binary-expression": "off",
+			"no-extra-boolean-cast": "warn",
 			"no-undef": "error",
 			"react/display-name": "off",
 			"react/react-in-jsx-scope": "off", // Optional, depends on React version

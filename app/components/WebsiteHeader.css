@@ -46,7 +46,7 @@
 
 .MuiList-root li.active {
 	opacity: 1;
-	background-color: #2090F4;
+	background-color: #008080;
 }
 
 .MuiList-root li:hover {
@@ -55,7 +55,7 @@
 }
 
 li.drawer-header {
-	background-color: #2090F4;
+	background-color: #F48420;
 	cursor: default;
 }
 
@@ -65,13 +65,15 @@ li.drawer-header .MuiTouchRipple-root {
 
 li.drawer-header * {
 	text-align: center;
-	font-weight: bold;
+	font-weight: bolder;
 	cursor: default;
-	color: #F48420
+	font-family: 'Jersey 25', sans-serif;
+	font-size: 20px;
+	color: #8420F4
 }
 
 li.drawer-header *:hover {
-	background-color: #2090F4;
+	background-color: #F48420;
 }
 
 #headerTextLogo {
@@ -89,6 +91,12 @@ li.drawer-header *:hover {
 	display: flex;
 	flex-direction: row;
 	justify-content: space-between;
+	/* clip-path: polygon(
+		2% 0%, 98% 0%,
+		100% 20%, 100% 80%,
+		98% 100%, 2% 100%,
+		0% 80%, 0% 20%
+	); */
 }
 
 /* #middleSearch select {
@@ -105,12 +113,12 @@ li.drawer-header *:hover {
 }
 
 #middleSearch select option {
-	color: #2090F4;
+	color: #008080;
 	font-weight: bold;
 }
 
 #middleSearch select option.selected {
-	background-color: #2090F4 !important;
+	background-color: #008080 !important;
     opacity: 1 !important;
     font-weight: bold !important;
 } */
@@ -119,11 +127,11 @@ li.drawer-header *:hover {
 	background-color: #5f5f5f;
 	outline: none;
 	border: none;
-	font-size: 18px;
+	font-size: 22px;
 	color: black;
 	padding-right: 10px;
 	padding-left: 5px;
-	font-family: var(--font-sans);
+	font-family: 'Josefin Sans', sans-serif;
 	font-weight: bold;
 	width: 80%;
 }
@@ -154,7 +162,7 @@ li.drawer-header *:hover {
 	color: white;
 	font-family: 'Josefin Sans', sans-serif;
 	font-size: 12px;
-	font-weight: 600;
+	font-weight: 700;
 }
 
 .desktop.nav .nav-item:not(.nav-link):hover {
@@ -174,7 +182,7 @@ li.drawer-header *:hover {
 	height: 6px;
 	top: 10px;
 	left: 20%;
-	background-color: #2090F4;
+	background-color: #008080;
 	transform-origin: bottom right;
 	transition: transform 0.25s ease-out;
 }

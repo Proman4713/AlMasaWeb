@@ -1,0 +1,15 @@
+#pfp {
+	display: block;
+	margin-left: auto;
+	background-color: white;
+	/* border: 3px solid transparent; */
+	box-shadow: 0 0 0 3px rgba(0, 0, 0, 0);
+	border-radius: 100%;
+	transition: all 300ms ease;
+	cursor: pointer;
+}
+
+#pfp:hover {
+	/* border-color: #008080; */
+	box-shadow: 0 0 0 3px #008080;
+}

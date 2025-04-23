@@ -1,0 +1,33 @@
+.productCard {
+	box-shadow: inset 0px -19px 20px 0px #2090F4;
+	/* box-shadow: inset 0px -19px 20px 0px #9ad0ff; */
+}
+
+.cardActionButton {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+
+	cursor: pointer;
+	border: none;
+	outline: none;
+
+	background-color: rgba(0, 0, 0, 0.5);
+	font-size: 25px;
+
+	width: 50px;
+	height: 50px;
+	border-radius: 50%;
+
+	transition: all 200ms ease;
+	opacity: 0.5;
+}
+
+.cardActionButton:hover {
+	opacity: 1;
+	transform: scale(1.1);
+}
+
+.cardActionButton:active {
+	transform: scale(0.8);
+}

@@ -2,6 +2,7 @@ import {
 	createContext,
 	useCallback,
 	useEffect,
+	useMemo,
 	useState
 } from "react";
 
@@ -12,13 +13,13 @@ const Appearance = {
 		return window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ? "dark" : "light";
 	},
 	addChangeListener: (func) => {
-		const listener = window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', e => {
-			func(e)
-		})
-		
+		const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
+		const listener = (e) => func(e);
+		mediaQuery.addEventListener('change', listener);
+
 		return {
-			remove: () => window.matchMedia('(prefers-color-scheme: dark)').removeEventListener('change', listener)
-		}
+			remove: () => mediaQuery.removeEventListener('change', listener)
+		};
 	}
 }
 
@@ -33,7 +34,7 @@ export function AppThemeProvider({
 	 *
 	 * @return {boolean} the application theme
 	 */
-	const getApplicationTheme = async (determinedAutomatic = false) => {
+	const getApplicationTheme = (determinedAutomatic = false) => {
 		if (determinedAutomatic === true) {
 			const deviceColorScheme = Appearance.getColorScheme();
 			setTheme("automatic")
@@ -67,8 +68,8 @@ export function AppThemeProvider({
 	 * @return {Promise<void>} 
 	 * @param {boolean} determinedAutomatic Whether the theme was determined as automatic
 	 */
-	const setRuntimeTheme = useCallback(async (determinedAutomatic = false) => {
-		const theme = await getApplicationTheme(determinedAutomatic);
+	const setRuntimeTheme = useCallback((determinedAutomatic = false) => {
+		const theme = getApplicationTheme(determinedAutomatic);
 		
 		setDark(theme);
 	}, [])
@@ -76,6 +77,7 @@ export function AppThemeProvider({
 	useEffect(() => {
 		//* console.log("theme changed")
 		setRuntimeTheme()
+
 		const sub = Appearance.addChangeListener(() => {
 			if (theme === "automatic") {
 				setRuntimeTheme(true)
@@ -89,35 +91,32 @@ export function AppThemeProvider({
 	 *
 	 * @returns {object} An object with color values
 	 */
-	const colors = () => {
-		return {
-			primary: dark ? "#2e2d2d" : "#F48420",
-			secondary: dark ? "#575757" : "#D66B0B",
-			tertiary: dark ? "#d3d3d3" : "#8420F4",
-			screen: dark ? "#1f1f1f" : "#e3e3e3",
+	const colors = useMemo(() => ({
+		primary: dark ? "#181a1b" : "#F48420",
+		secondary: dark ? "#303436" : "#D66B0B",
+		tertiary: dark ? "#d3d3d3" : "#8420F4",
+		screen: dark ? "#2B2B2B" : "#e3e3e3",
 
-			almasaMain: "#F48420",
-			almasaOther: "#2090F4",
+		almasaMain: "#F48420",
+		almasaOther: "#008080",
 
-			gray: "#5b5b5b",
+		gray: "#484E51",
 
-			constantWhite: "#ffffff",
-			dynamicWhite: dark ? "#ffffff" : "#000000",
+		constantWhite: "#ffffff",
+		dynamicWhite: dark ? "#ffffff" : "#000000",
 
-			constantBlack: "#000000",
-			dynamicBlack: dark ? "#000000" : "#ffffff",
+		constantBlack: "#000000",
+		dynamicBlack: dark ? "#000000" : "#ffffff",
 
-			danger: "#F42026",
-			warning: "#F4EE20",
-			success: dark ? "#0ACD66" : "#2090F4",
+		danger: "#F42026",
+		warning: "#F4EE20",
+		success: dark ? "#0ACD66" : "#008080",
 
-			listItem: dark ? "#2e2d2d" : "#f4f8f8",
-			thumb: dark ? "#0ACD66" : "#D8DBE2",
-			track: dark ? null : "#737373",
-			placeholder: "#ffffffee",
-			lightButton: "#0A3200"
-		}
-	}
+		listItem: dark ? "#181a1b" : "#f4f8f8",
+		thumb: dark ? "#0ACD66" : "#C7CAD1",
+		placeholder: "#ffffffee",
+		lightButton: "#0A3200"
+	}), [dark])
 
 	return (
 		<AppThemeContext.Provider value={

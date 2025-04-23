@@ -1,5 +1,6 @@
 import {
 	createContext,
+	useMemo,
 	useState
 } from "react";
 
@@ -11,11 +12,11 @@ export function LocaleProvider({
 	const [locale, setLocale] = useState("en");
 	//const memoizedLocale = useMemo(() => locale, [locale]);
 
-	const getApplicationLocale = async () => {
+	const getApplicationLocale = () => {
 		try {
 			// Try to get the theme from SecureStore
-			if (typeof window === "undefined") return setLocale('en'); // eslint-disable-next-line no-undef
-			const localeSetting = await localStorage.getItem('locale');
+			if (typeof window === "undefined") return setLocale('en');
+			const localeSetting = localStorage.getItem('locale');
 
 			if (localeSetting !== null) {
 				setLocale(localeSetting);
@@ -25,17 +26,17 @@ export function LocaleProvider({
 		}
 	};
 
-	const setApplicationLocale = async (locale) => {
+	const setApplicationLocale = (locale) => {
 		try {
-			if (typeof window === "undefined") return setLocale(locale); // eslint-disable-next-line no-undef
-			await localStorage.setItem('locale', locale);
+			if (typeof window === "undefined") return setLocale(locale);
+			localStorage.setItem('locale', locale);
 			setLocale(locale);
 		} catch (e) {
 			return;
 		}
 	}
 
-	const appText = (() => {
+	const appText = useMemo(() => {
 		//* console.log(locale)
 		let text = {
 			"Home": "HOME",
@@ -195,7 +196,7 @@ export function LocaleProvider({
 		}
 
 		return text;
-	})();
+	}, [locale]);
 
 	return (
 		<localeContext.Provider

@@ -3,12 +3,11 @@
 	position: relative;
 	width: 100%;
 	max-width: 100%;
-	margin: auto;
 }
 
 .carousel-inner {
 	display: flex;
-	transition: transform 0.5s ease-in-out;
+	transition: transform 800ms ease-in-out;
 }
 
 .carousel-item {
@@ -17,9 +16,12 @@
 	align-items: center;
 	justify-content: center;
 	min-height: 300px;
-	font-size: 3rem;
+	font-size: 48px;
 	font-weight: bold;
 	user-select: none;
+	-ms-user-select: none;
+	-webkit-user-select: none;
+	-moz-user-select: none;
 }
 
 .carousel-dots {
@@ -28,16 +30,17 @@
 	width: 100%;
 	display: flex;
 	justify-content: center;
-	gap: 8px;
+	gap: 10px;
 }
 
 .carousel-dots .dot {
 	width: 12px;
 	height: 12px;
-	border-radius: 50%;
+	/* border-radius: 50%; */
 	border: none;
 	cursor: pointer;
-	transition: background 0.3s ease;
+	transform: rotate(45deg);
+	transition: background 300ms ease;
 	outline: none;
 }
 
@@ -47,11 +50,11 @@
 	transform: translateY(-50%);
 	border: none;
 	background-color: transparent;
-	font-size: 3rem;
+	font-size: 48px;
 	padding: 8px 16px;
 	cursor: pointer;
 	z-index: 1;
-	opacity: 0.5;
+	opacity: 0.2;
 	outline: none;
 	transition: all 300ms ease;
 }

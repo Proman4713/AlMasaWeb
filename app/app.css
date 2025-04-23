@@ -17,11 +17,11 @@ iframe #header {
 }
 
 ::-webkit-scrollbar-track {
-	background-color: #F48420;
+	background-color: #2B2B2B;
 }
 
 ::-webkit-scrollbar-thumb {
-	background: #2090F4;
+	background: #F48420;
 	border-radius: 10px;
 }
 
@@ -31,10 +31,12 @@ input {
 
 .MuiSelect-select.MuiSelect-outlined.MuiInputBase-input.MuiOutlinedInput-input {
 	font-weight: bold;
+	-webkit-text-stroke: 0.25px black;
+	font-family: 'Josefin Sans', sans-serif;
 }
 
 .MuiList-root.MuiList-padding.MuiMenu-list {
-	background-color: #2090F4;
+	background-color: #008080;
 }
 
 .MuiOutlinedInput-notchedOutline  {
@@ -43,6 +45,8 @@ input {
 
 .MuiButtonBase-root.MuiMenuItem-root.MuiMenuItem-gutters {
 	font-weight: bold;
+	-webkit-text-stroke: 0.25px black;
+	font-family: 'Josefin Sans', sans-serif;
 	padding: 6px 30px;
 }
 
@@ -53,6 +57,43 @@ input {
 .MuiButtonBase-root.MuiMenuItem-root.MuiMenuItem-gutters.Mui-selected {
 	background-color: #F48420;
 	opacity: 1;
+}
+
+.dropdownMenu {
+	position: absolute;
+	min-width: 160px;
+	box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+	border-radius: 4px;
+	font-size: 16px;
+	z-index: 1;
+	right: 5%;
+}
+
+.dropdownMenu ul {
+	list-style: none;
+	padding: 5px 0;
+	margin-top: 10px;
+	margin-bottom: 10px;
+}
+
+.dropdownMenu ul li {
+	display: block;
+	transition: all 300ms ease;
+	color: #FFF;
+	padding: 4px 16px;
+	clear: both;
+	font-weight: 400;
+	text-decoration: none;
+	font-family: 'Josefin Sans', sans-serif;
+	line-height: 24px;
+	width: 50%;
+	margin: auto;
+	border-radius: 15px;
+	margin-bottom: 5px;
+}
+
+.dropdownMenu ul li:hover {
+	background-color: #f1f1f1;
 }
 
 html,

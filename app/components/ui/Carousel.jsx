@@ -1,6 +1,6 @@
 import { useSwipeable } from "react-swipeable";
 import { useContext, useEffect, useRef, useState } from "react";
-import "./Carousel.css"; // Create this next
+import "./Carousel.css";
 import { AppThemeContext } from "../../contexts/colors";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faAngleLeft, faAngleRight } from "@fortawesome/free-solid-svg-icons";
@@ -11,9 +11,11 @@ export default function Carousel({ children, interval=5000 }) {
 		colors
 	} = useContext(AppThemeContext);
 
+	const [paused, setPaused] = useState(false);
 	const [index, setIndex] = useState(0);
+
+	const slides = Array.isArray(children) ? children : [children];
 	const totalSlides = Array.isArray(children) ? children.length : 1;
-	const autoPlayRef = useRef();
 
 	const clampIndex = (i) => (i + totalSlides) % totalSlides;
 
@@ -27,38 +29,34 @@ export default function Carousel({ children, interval=5000 }) {
 
 	// Autoplay logic
 	useEffect(() => {
-		autoPlayRef.current = () => goToSlide(index + 1);
-	});
-
-	useEffect(() => {
-		const play = () => autoPlayRef.current();
-		const intervalId = setInterval(play, interval);
+		if (paused) return;
+		const intervalId = setInterval(() => {
+			setIndex(prev => clampIndex(prev + 1));
+		}, interval);
 		return () => clearInterval(intervalId);
-	}, [interval, index]);
+	}, [paused, interval, totalSlides]);
 
 	return (
-		<div className="carousel-wrapper">
+		<div className="carousel-wrapper" onMouseEnter={() => setPaused(true)} onMouseLeave={() => setPaused(false)}>
 			<div className="carousel-inner" {...swipeHandlers} style={{ transform: `translateX(-${index * 100}%)` }}>
-				{Array.isArray(children)
-					? children.map((child, i) => (
-						<div className="carousel-item" key={i}>
-							{child}
-						</div>
-					))
-					: <div className="carousel-item">{children}</div>}
+				{slides.map((child, i) => (
+					<div className="carousel-item" key={i}>
+						{child}
+					</div>
+				))}
 			</div>
-			<button className="nav-button prev" style={{ color: colors().primary }} onClick={() => goToSlide(index - 1)}><FontAwesomeIcon icon={faAngleLeft} /></button>
-			<button className="nav-button next" style={{ color: colors().primary }} onClick={() => goToSlide(index + 1)}><FontAwesomeIcon icon={faAngleRight} /></button>
+			<button aria-label="Previous slide" className="nav-button prev" style={{ color: dark ? colors.tertiary : colors.primary }} onClick={() => goToSlide(index - 1)}><FontAwesomeIcon icon={faAngleLeft} /></button>
+			<button aria-label="Next slide" className="nav-button next" style={{ color: dark ? colors.tertiary : colors.primary }} onClick={() => goToSlide(index + 1)}><FontAwesomeIcon icon={faAngleRight} /></button>
 			<div className="carousel-dots">
-				{Array.isArray(children) &&
-					children.map((_, i) => (
+				{slides.length > 1 &&
+					slides.map((_, i) => (
 						<button
 							key={i}
 							className={`dot`}
-							style={{ backgroundColor: index === i ? colors().success : "#ccc" }}
+							style={{ backgroundColor: index === i ? colors.success : "#ccc" }}
 							onClick={() => goToSlide(i)}
 						/>
-					))}
+				))}
 			</div>
 		</div>
 	);
