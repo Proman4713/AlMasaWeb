@@ -85,7 +85,7 @@ export default function ProductCard({ productName="Al-Masa's Product", imgUrl=lo
 							<button aria-label="Add to cart" className="cardActionButton" style={{ color: colors.success }}><FontAwesomeIcon icon={faCartPlus} /></button>
 							<button aria-label="Add to wishlist" className="cardActionButton" style={{ color: "red" }}><FontAwesomeIcon icon={faHeart} /></button>
 						</div>
-						<h1 style={{ ...productCardStyles.cardText, ...productCardStyles.priceText }}>Price: <span style={productCardStyles.price}>{new Intl.NumberFormat('en-US', { style: "currency", currency: "EGP" }).format(price) + " E£"}</span></h1>
+						<h1 style={{ ...productCardStyles.cardText, ...productCardStyles.priceText }}>Price: <span style={productCardStyles.price}>{new Intl.NumberFormat('en-US').format(price) + " £"}</span></h1>
 					</div>
 				</div>
 			</div>

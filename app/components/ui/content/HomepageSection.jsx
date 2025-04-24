@@ -1,5 +1,5 @@
 import { useContext, useMemo } from "react";
-import { AppThemeContext } from "../../contexts/colors";
+import { AppThemeContext } from "../../../contexts/colors";
 
 export default function HomepageSection({ sectionTitle="", id="", children }) {
 	const { colors, dark } = useContext(AppThemeContext);
@@ -19,8 +19,8 @@ export default function HomepageSection({ sectionTitle="", id="", children }) {
 			fontSize: "45px",
 			// fontWeight: "bold",
 			fontFamily: "'Jersey 25', monospace",
-			letterSpacing: "1px"
-			// WebkitTextStroke: `0.125px ${colors.dynamicWhite}`,
+			letterSpacing: "1px",
+			WebkitTextStroke: `0.0625px ${colors.dynamicWhite}`,
 		}
 	}), [colors])
 	

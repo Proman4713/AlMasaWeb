@@ -1,9 +1,10 @@
 import { useState } from "react";
 import Carousel from "../components/ui/Carousel";
-import HomepageSection from "../components/ui/HomepageSection";
+import HomepageSection from "../components/ui/content/HomepageSection";
 import ProductCard from "../components/ui/ProductCard";
-import SectionDivider from "../components/ui/SectionDivider";
+import SectionDivider from "../components/ui/content/SectionDivider";
 import WebsiteHeader from "../components/WebsiteHeader";
+import Footer from "../components/ui/content/Footer";
 
 export function meta() {
 	return [
@@ -41,5 +42,7 @@ export default function Home() {
 				))}
 			</Carousel>
 		</HomepageSection>
+		<SectionDivider m={0} />
+		{/* <Footer /> */}
 	</>;
 }
