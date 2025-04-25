@@ -1,98 +1,68 @@
-/* footer {
-	direction: ltr;
-	font-family: 'Montserrat', sans-serif;
-	font-size: 0.98em;
-	font-weight: 400;
-	line-height: 26px;
-	text-align: left;
-	color: #777;
-	background-color: #171B1F;
-	background: #212529;
-	padding: 0;
-	margin-top: 0 !important;
-	position: relative;
-	clear: both;
-	box-sizing: border-box;
-	border: 0 !important;
-}
-
-#footer-copyright {
-	padding: 3rem 0 !important;
-	background-color: #12161A !important;
-	background: #1c2023;
-	font-family: 'Montserrat', sans-serif;
-	color: #777;
-	font-size: 0.98em;
-	line-height: 26px;
-	text-align: left;
-}
-
-#copyright-container {
-	width: 100%;
-	margin: 0 auto;
-	padding: 1.5rem 3rem !important;
-	font-family: 'Montserrat', sans-serif;
-	font-size: 0.98em;
-	line-height: 26px;
-	color: #777;
-	box-sizing: border-box;
-}
-
-#copyright-row {
+#company-info {
 	display: flex;
-	flex-wrap: wrap;
-	justify-content: space-between !important;
-	margin: 0 -0.75rem;
-	box-sizing: border-box;
-	font-size: 0.98em;
+	flex-direction: column;
+	justify-content: center;
+	align-items: left;
 }
 
-.copyright-column {
-	flex: 0 0 auto;
-	width: auto;
-	padding: 0 0.75rem;
-	font-family: 'Montserrat', sans-serif;
-	font-size: 0.98em;
-	line-height: 26px;
-	color: #777;
-	box-sizing: border-box;
+.footer-text {
+	color: white;
+	font-weight: bold;
+	opacity: 0.8;
+	font-family: 'Ubuntu Sans', sans-serif;
+	max-width: 450px;
+	margin-bottom: 0;
+	font-size: 16px;
 }
 
-#copyright-text {
-	opacity: 0.4 !important;
-	font-weight: 300 !important;
-	color: #FFF !important;
-	margin: 0;
-	padding: 0;
-	font-size: 0.98em;
-	font-family: 'Montserrat', sans-serif;
+#socials {
+	display: grid;
+	grid-template-columns: repeat(3, 1fr);
+	gap: 0;
 }
 
-#links-list {
-	list-style: none;
-	padding: 0;
-	margin: 0;
-	font-family: 'Montserrat', sans-serif;
-	font-size: 0.98em;
-}
-
-.list-item {
-	display: inline-block;
-	margin: 0 !important;
-	font-size: 0.98em;
-	line-height: 24px;
-	font-family: 'Montserrat', sans-serif;
-}
-
-.list-item a,
-.list-item p {
-	text-decoration: none;
-	color: #FFF !important;
+.social-link {
+	color: white;
+	font-weight: bold;
 	font-family: 'Josefin Sans', sans-serif;
+	font-size: 16px;
+	transition: all 300ms ease;
+	/* add paragraph element (p) margins to Link (a) components: */
+	margin-block-start: 1em;
+	margin-block-end: 1em;
+}
+
+.social-link:hover {
+	opacity: 0.7;
+}
+
+#newsletter-signup {
+	border: none;
+	outline: none;
+	width: 20%;
+	padding: 8px;
+	font-weight: bold;
+	font-family: 'Jersey 25', sans-serif;
+	font-size: 100%;
+	cursor: pointer;
+	transition: all 300ms ease;
+	border-radius: 15px;
+}
+
+#newsletter-signup:hover {
+	color: #008080;
+}
+
+#newsletter-signup:active {
+	background-color: #008080;
+	color: white;
+	transform: scale(0.9);
+}
+
+#company-name {
+	background-image: linear-gradient(90deg, #004040, #006060, #008080, #00A0A0, #00C0C0, #004040);
+	color: #00000000;
 	font-weight: 700 !important;
-	transition: all 0.1s ease-in-out;
-	font-size: 0.98em;
-	line-height: 24px;
-	margin-right: 1.5rem!important;
-	margin-left: 1.5rem!important;
-} */
+	-webkit-background-clip: text;
+	background-clip: text;
+}

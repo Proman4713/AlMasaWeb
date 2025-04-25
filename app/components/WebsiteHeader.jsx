@@ -1,5 +1,5 @@
 import "./WebsiteHeader.css";
-import { memo, useCallback, useContext, useEffect, useState } from 'react';
+import React, { memo, useCallback, useContext, useEffect, useState } from 'react';
 import Sticky from 'react-stickynode';
 import { AppThemeContext } from '../contexts/colors';
 import { localeContext } from "../contexts/localeManagement";
@@ -99,6 +99,7 @@ export default function WebsiteHeader({
 								src={logoText}
 								alt="Logo"
 								id="headerTextLogo"
+								loading="lazy"
 							/>
 						</Link>}
 						{(drawer && !showAppName)
@@ -124,7 +125,7 @@ export default function WebsiteHeader({
 								<li className="nav-item nav-link">{appText["About"]}</li>
 							</ul>
 							{/* {headerTitle && <h2 style={{ fontSize: 22, color: colors.success }}>{headerTitle}</h2>} */}
-							<div id="middleSearch">
+							<div id="middleSearch" className="searchInput">
 								<Select
 									id="categorySelect"
 									value={selectedSearchCategory}
@@ -139,7 +140,7 @@ export default function WebsiteHeader({
 									<MenuItem value="pcs">Tower PCs</MenuItem>
 									<MenuItem value="monitors">Monitors</MenuItem>
 								</Select>
-								<input type="text" id="searchbox" placeholder="Search" />
+								<input type="text" className="searchbox" placeholder="Search" />
 								<FontAwesomeIcon color={colors.almasaMain} style={{ padding: 2, cursor: "pointer", alignSelf: "center" }} icon={faSearch} fontSize={"2.25em"} />
 							</div>
 							<ul className="secondary-nav">

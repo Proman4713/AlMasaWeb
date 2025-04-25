@@ -43,6 +43,6 @@ export default function Home() {
 			</Carousel>
 		</HomepageSection>
 		<SectionDivider m={0} />
-		{/* <Footer /> */}
+		<Footer />
 	</>;
 }
