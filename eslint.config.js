@@ -10,7 +10,11 @@ export default defineConfig([
 		languageOptions: {
 			ecmaVersion: "latest",
 			sourceType: "module",
-			globals: globals.browser,
+			globals: {
+				...globals.browser,
+				...globals.node, // Optional: remove if you want to isolate client/server
+				global: "readonly",
+			},
 			parserOptions: {
 				ecmaFeatures: { jsx: true },
 			},
@@ -38,5 +42,6 @@ export default defineConfig([
 				version: "detect",
 			},
 		},
+		ignores: ["**/node_modules/**", "**/dist/**", "**/build/**", "**/.build/**", "**/.vite/**"],
 	},
 ]);
